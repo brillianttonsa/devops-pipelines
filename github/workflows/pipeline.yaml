@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+on:
+  push:
+    # Only trigger the workflow on pushes to the main branch
+    branches: [ main ] 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout code 
+        uses: actions/checkout@v5
+
+      # Set up Node.js environment, install dependencies, and run tests
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Install dependencies using npm
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
